@@ -146,8 +146,6 @@
     font-size: 14px;
     line-height: 20px;
     background: white none repeat scroll 0% 0%;
-    user-select: none;
-    cursor: pointer;
     transition: background 20ms ease-in 0s;
 }
 
