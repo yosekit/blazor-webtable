@@ -1,0 +1,200 @@
+﻿.webtable-scroller {
+    margin-right: 0px;
+    margin-bottom: 0px;
+    flex-grow: 1;
+    flex-shrink: 0;
+    z-index: 1;
+    overflow: auto hidden;
+}
+
+.webtable-focusable {
+    transition: box-shadow 300ms;
+}
+
+/********************************/
+
+.webtable-wrapper {
+    margin-top: 1px;
+    margin-bottom: 0px;
+    width: 996px;
+    max-width: 996px;
+    align-self: center;
+}
+
+.webtable-table {
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-direction: column;
+}
+
+.webtable-table-view {
+    padding-bottom: 10px;
+    float: left;
+    min-width: 100%;
+    user-select: none;
+    font-variant-numeric: lining-nums tabular-nums;
+}
+
+.webtable-columns {
+    height: 33px;
+    min-width: calc(100% - 252px);
+    left: 0px;
+    right: 0px;
+    z-index: 83;
+    border-top: 1px solid rgb(233, 233, 231);
+    background: white none repeat scroll 0% 0%;
+    color: rgba(55, 53, 47, 0.65);
+    box-shadow: white -3px 0px 0px, rgb(233, 233, 231) 0px 1px 0px;
+}
+
+.webtable-columns-column {
+    padding: 0px;
+    width: 276px;
+    flex-shrink: 0;
+    border-right: 1px solid rgba(55, 53, 47, 0.09);
+    overflow: hidden;
+    font-size: 14px;
+}
+
+.webtable-columns-column-header {
+    padding-left: 8px;
+    padding-right: 8px;
+    width: 100%;
+    height: 100%;
+    user-select: none;
+    cursor: pointer;
+    transition: background 20ms ease-in 0s;
+}
+
+.webtable-columns-column-header:hover {
+    background: rgba(55, 53, 47, 0.08) none repeat scroll 0% 0%;
+}
+
+.webtable-columns-column-content {
+    min-width: 0px;
+    align-items: center;
+    line-height: 120%;
+    font-size: 14px;
+}
+
+.webtable-columns-column-content-icon {
+    margin-right: 6px;
+}
+
+.webtable-columns-column-content-name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.webtable-add-column {
+    width: 32px;
+    justify-content: flex-start;
+    user-select: none;
+    cursor: pointer;
+    transition: background 20ms ease-in 0s;
+}
+
+.webtable-add-column:hover {
+    background: rgba(55, 53, 47, 0.08) none repeat scroll 0% 0%;
+}
+
+.webtable-add-column-icon {
+    width: 32px;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.webtable-rows {
+    min-width: calc(100% - 252px);
+}
+
+.webtable-rows-row {
+    border-bottom: 1px solid rgb(233, 233, 231);
+}
+
+.webtable-item {
+    padding: 5px 8px 6px;
+    display: block;
+    width: 276px;
+    min-height: 32px;
+    border-right: 1px solid rgb(238, 238, 237);
+    white-space: normal;
+    cursor: default;
+    font-size: 14px;
+    overflow: hidden;
+}
+
+.webtable-item-content {
+    font-weight: 500;
+    line-height: 1.5;
+    white-space: normal;
+    word-break: break-word;
+    pointer-events: none;
+    background-position: 0px 100%;
+    background-size: 100% 1px;
+}
+
+.webtable-add-row {
+    padding-left: 8px;
+    height: 32px;
+    width: 100%;
+    left: 0px;
+    right: 0px;
+    align-items: center;
+    font-size: 14px;
+    line-height: 20px;
+    background: white none repeat scroll 0% 0%;
+    user-select: none;
+    cursor: pointer;
+    transition: background 20ms ease-in 0s;
+}
+
+.webtable-add-row:hover {
+    background: rgba(55, 53, 47, 0.08) none repeat scroll 0% 0%;
+}
+
+.webtable-add-row-text {
+    color: rgba(55, 53, 47, 0.5);
+}
+
+.webtable-functions {
+    padding-right: 32px;
+    height: 33px;
+    min-width: 100%;
+    left: 0px;
+    z-index: 82;
+    border-top: 1px solid rgb(233, 233, 231);
+    background: white none repeat scroll 0% 0%;
+    font-size: 14px;
+    user-select: none;
+    clip-path: polygon(0% -20%, 100% -20%, 100% 100%, 0% 100%);
+}
+
+.webtable-functions > div:hover {
+    background: rgba(55, 53, 47, 0.08) none repeat scroll 0% 0%;
+}
+
+.webtable-functions-function {
+    padding-right: 8px;
+    width: 100%;
+    height: 32px;
+    align-items: center;
+    justify-content: flex-end;
+    white-space: nowrap;
+    overflow: hidden;
+    user-select: auto;
+    cursor: pointer;
+    transition: background 20ms ease-in 0s;
+}
+
+.webtable-functions-function > div {
+    align-items: center;
+    opacity: 1;
+}
+
+span.webtable-functions-function-name {
+    margin-bottom: 2px;
+    color: rgba(55, 53, 47, 0.5);
+}

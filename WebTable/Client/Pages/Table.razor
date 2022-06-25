@@ -1,0 +1,93 @@
+﻿@page "/table"
+
+<PageTitle>Table - демонстрация таблицы</PageTitle>
+
+<h1 class="mb-5">Table</h1>
+
+<div class="webtable-wrapper">
+	<div class="d-flex webtable-table">
+		<div class="position-relative">
+			<div class="webtable-scroller">
+				<div class="position-relative webtable-table-view">
+					<div class="position-relative">
+
+						@if (Columns is null)
+						{
+							<p><em>Loading columns ...</em></p>
+						}
+						else
+						{
+							<div class="d-flex position-absolute webtable-columns">
+								<div class="d-inline-flex m-0">
+									@foreach (var column in Columns)
+									{
+										<div class="d-flex flex-row">
+											<div class="d-flex position-relative">
+												<div class="d-flex webtable-columns-column">
+													<div class="d-flex webtable-focusable webtable-columns-column-header">
+														<div class="d-flex webtable-columns-column-content">
+															<div class="webtable-columns-column-content-icon"></div>
+															<div class="webtable-columns-column-content-name">@column.Name</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									}
+								</div>
+								<div class="d-flex webtable-focusable webtable-add-column">
+									<div class="d-flex webtable-add-column-icon"></div>
+								</div>
+							</div>
+
+							<div style="height: 34px;"></div>
+						}
+
+						@if (Rows is not null && Columns is not null)
+						{
+							<div class="position-relative webtable-rows">
+								@foreach (var row in Rows)
+								{
+									<div class="d-flex webtable-selectable webtable-rows-row">
+										@foreach (var column in Columns)
+										{
+											<div class="d-flex">
+												<div class="webtable-item">
+													<span class="webtable-item-content">@GetTableItem(row, column).Content</span>
+												</div>
+											</div>
+										}
+									</div>
+								}
+							</div>
+						}
+
+						<div class="d-flex webtable-focusable webtable-add-row">
+							<div class="webtable-add-row-icon"></div>
+							<span class="webtable-add-row-text">New</span>
+						</div>
+
+						@if (Columns is not null)
+						{
+							<div class="d-flex webtable-functions">
+								@foreach (var column in Columns)
+								{
+									<div class="d-flex" style="width: 276px">
+										<div class="d-flex webtable-focusable webtable-functions-function">
+											<div class="d-flex">
+												<span class="webtable-functions-function-name">Calculate</span>
+												<div class="webtable-functions-function-icon"></div>
+											</div>
+										</div>
+									</div>
+								}
+							</div>
+						}
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
