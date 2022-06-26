@@ -1,5 +1,6 @@
 global using WebTable.Shared.Models;
 global using Microsoft.EntityFrameworkCore;
+global using Microsoft.EntityFrameworkCore.Storage;
 global using WebTable.Server.Data;
 
 using Microsoft.AspNetCore.ResponseCompression;

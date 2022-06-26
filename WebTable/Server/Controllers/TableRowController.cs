@@ -22,22 +22,34 @@ namespace WebTable.Server.Controllers
         [HttpPost]
         public async Task<ActionResult<TableRow>> PostRow(TableRow row)
         {
-            _context.Rows.Add(row);
-
-            await _context.SaveChangesAsync();
-
-            var columns = await _context.Columns.ToListAsync();
-
-            foreach(var column in columns)
+            using(IDbContextTransaction transaction = _context.Database.BeginTransaction())
             {
-                _context.Items.Add(new TableItem
+                try
                 {
-                    ColumnId = column.Id,
-                    RowId = row.Id
-                }); ;
-            }
+                    _context.Rows.Add(row);
 
-            await _context.SaveChangesAsync();
+                    await _context.SaveChangesAsync();
+
+                    var columns = await _context.Columns.ToListAsync();
+
+                    foreach (var column in columns)
+                    {
+                        _context.Items.Add(new TableItem
+                        {
+                            ColumnId = column.Id,
+                            RowId = row.Id
+                        }); ;
+                    }
+
+                    await _context.SaveChangesAsync();
+
+                    transaction.Commit();
+                }
+                catch (Exception)
+                {
+                    transaction.Rollback();
+                }
+            }
 
             return await Task.FromResult(row);
         }
