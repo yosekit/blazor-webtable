@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebTable.Server.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/table/columns")]
     [ApiController]
     public class TableColumnController : ControllerBase
     {

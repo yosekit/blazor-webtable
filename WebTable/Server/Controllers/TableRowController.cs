@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebTable.Server.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/table/rows")]
     [ApiController]
     public class TableRowController : ControllerBase
     {
@@ -18,5 +18,15 @@ namespace WebTable.Server.Controllers
         {
             return await _context.Rows.ToListAsync();
         }
+
+        [HttpPost]
+        public async Task<ActionResult<TableRow>> PostRow(TableRow row)
+        {
+            _context.Rows.Add(row);
+            await _context.SaveChangesAsync();
+
+            return await Task.FromResult(row);
+        }
+
     }
 }

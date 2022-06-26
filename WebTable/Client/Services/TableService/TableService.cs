@@ -1,4 +1,4 @@
-﻿using System.Net.Http.Json;
+﻿using Newtonsoft.Json;
 using WebTable.Shared.Models;
 
 namespace WebTable.Client.Services
@@ -6,6 +6,7 @@ namespace WebTable.Client.Services
     public abstract class TableService<T> : ITableService<T>
     {
         protected string _uriGetAll = string.Empty;
+        protected string _uriSave = string.Empty;
 
         protected readonly HttpClient _http;
 
@@ -20,7 +21,40 @@ namespace WebTable.Client.Services
 
         public async Task<List<T>> GetAllAsync()
         {
-            return await _http.GetFromJsonAsync<List<T>>(_uriGetAll);
+            var requestMessage = new HttpRequestMessage(HttpMethod.Get, _uriGetAll);
+
+            var response = await _http.SendAsync(requestMessage);
+            
+            var resonseStatusCode = response.StatusCode;
+            if(resonseStatusCode == System.Net.HttpStatusCode.OK)
+            {
+                var responseBody = await response.Content.ReadAsStringAsync();
+
+                return await Task.FromResult(JsonConvert.DeserializeObject<List<T>>(responseBody));
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public async Task<T> SaveAsync(T obj)
+        {
+            string serializedOjb = JsonConvert.SerializeObject(obj);
+
+            var requestMessage = new HttpRequestMessage(HttpMethod.Post, _uriSave);
+
+            requestMessage.Content = new StringContent(serializedOjb);
+            requestMessage.Content.Headers.ContentType
+                = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+
+            var response = await _http.SendAsync(requestMessage);
+
+            var responseBody = await response.Content.ReadAsStringAsync();
+
+            var returnedObj = JsonConvert.DeserializeObject<T>(responseBody);
+
+            return await Task.FromResult(returnedObj);
         }
     }
 }

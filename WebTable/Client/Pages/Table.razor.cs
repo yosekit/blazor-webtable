@@ -37,5 +37,14 @@ namespace WebTable.Client.Pages
 
             StateHasChanged();
         }
+
+        private async Task AddRow()
+        {
+            var row = new TableRow();
+
+            await tableRowService.SaveAsync(row);
+
+            await LoadTableAsync();
+        }
     }
 }
