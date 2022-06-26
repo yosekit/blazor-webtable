@@ -38,8 +38,8 @@
 										</div>
 									}
 								</div>
-								<div class="d-flex webtable-focusable webtable-add-column">
-									<div class="d-flex webtable-add-column-icon"></div>
+								<div class="d-flex webtable-focusable webtable-add-column" type="button" @onclick=AddColumn>
+									<div class="d-flex webtable-add-column-icon">+</div>
 								</div>
 							</div>
 
@@ -65,7 +65,7 @@
 							</div>
 						}
 
-						<div class="webtable-focusable webtable-add-row" type="button" @onclick=AddRow>
+						<div class="d-flex webtable-focusable webtable-add-row" type="button" @onclick=AddRow>
 							<div class="webtable-add-row-icon"></div>
 							<span class="webtable-add-row-text">New</span>
 						</div>

@@ -16,6 +16,6 @@ namespace WebTable.Shared.Models
 
         public string Name { get; set; }
 
-        public List<TableColumn> Columns { get; set; }
+        public List<TableColumn> Columns { get; set; } = new List<TableColumn>();
     }
 }

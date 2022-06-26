@@ -11,6 +11,6 @@ namespace WebTable.Shared.Models
         public string Name { get; set; } = "Name";
 
         public TableColumnTypeId TypeId { get; set; } = TableColumnTypeId.Text;
-        public TableColumnType Type { get; set; }
+        public TableColumnType? Type { get; set; }
     } 
 }

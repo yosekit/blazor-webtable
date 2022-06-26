@@ -38,6 +38,15 @@ namespace WebTable.Client.Pages
             StateHasChanged();
         }
 
+        private async Task AddColumn()
+        {
+            var column = new TableColumn();
+
+            await tableColumnService.SaveAsync(column);
+
+            await LoadTableAsync();
+        }
+
         private async Task AddRow()
         {
             var row = new TableRow();
