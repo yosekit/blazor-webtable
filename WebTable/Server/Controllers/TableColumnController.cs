@@ -27,6 +27,18 @@ namespace WebTable.Server.Controllers
 
             await _context.SaveChangesAsync();
 
+            var rows = await _context.Rows.ToListAsync();
+            foreach (var row in rows)
+            {
+                _context.Items.Add(new TableItem
+                {
+                    RowId = row.Id,
+                    ColumnId = column.Id
+                });
+            }
+            
+            await _context.SaveChangesAsync();
+
             return await Task.FromResult(column);
         }
     }

@@ -11,10 +11,7 @@ namespace WebTable.Client.Pages
 
         public TableItem GetTableItem(TableRow row, TableColumn column)
         {
-            if (Items is null || !Items.Any())
-                return new TableItem();
-
-            return Items[0];
+            return Items.FirstOrDefault(i => i.RowId == row.Id && i.ColumnId == column.Id);
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)

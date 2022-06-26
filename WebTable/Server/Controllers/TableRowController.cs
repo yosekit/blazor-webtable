@@ -23,6 +23,20 @@ namespace WebTable.Server.Controllers
         public async Task<ActionResult<TableRow>> PostRow(TableRow row)
         {
             _context.Rows.Add(row);
+
+            await _context.SaveChangesAsync();
+
+            var columns = await _context.Columns.ToListAsync();
+
+            foreach(var column in columns)
+            {
+                _context.Items.Add(new TableItem
+                {
+                    ColumnId = column.Id,
+                    RowId = row.Id
+                }); ;
+            }
+
             await _context.SaveChangesAsync();
 
             return await Task.FromResult(row);
