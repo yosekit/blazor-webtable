@@ -31,9 +31,9 @@ namespace WebTable.Client.Pages
 
         private async Task LoadTableAsync()
         {
-            Columns = await tableColumnsService.GetAllAsync();
-            Rows = await tableRowsService.GetAllAsync();
-            Items = await tableItemsService.GetAllAsync();
+            Columns = await tableColumnService.GetAllAsync();
+            Rows = await tableRowService.GetAllAsync();
+            Items = await tableItemService.GetAllAsync();
 
             StateHasChanged();
         }
