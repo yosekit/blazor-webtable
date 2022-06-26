@@ -10,8 +10,7 @@ namespace WebTable.Client.Services
 
         protected override void OnInitializedUri()
         {
-            _uriGetAll = "api/table/rows";
-            _uriSave = "api/table/rows";
+            _requestUri = "api/table/rows";
         }
     }
 }

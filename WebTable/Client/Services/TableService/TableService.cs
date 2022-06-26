@@ -5,8 +5,7 @@ namespace WebTable.Client.Services
 {
     public abstract class TableService<T> : ITableService<T>
     {
-        protected string _uriGetAll = string.Empty;
-        protected string _uriSave = string.Empty;
+        protected string _requestUri = string.Empty;
 
         protected readonly HttpClient _http;
 
@@ -21,7 +20,7 @@ namespace WebTable.Client.Services
 
         public async Task<List<T>> GetAllAsync()
         {
-            var requestMessage = new HttpRequestMessage(HttpMethod.Get, _uriGetAll);
+            var requestMessage = new HttpRequestMessage(HttpMethod.Get, _requestUri);
 
             var response = await _http.SendAsync(requestMessage);
             
@@ -42,7 +41,7 @@ namespace WebTable.Client.Services
         {
             string serializedOjb = JsonConvert.SerializeObject(obj);
 
-            var requestMessage = new HttpRequestMessage(HttpMethod.Post, _uriSave);
+            var requestMessage = new HttpRequestMessage(HttpMethod.Post, _requestUri);
 
             requestMessage.Content = new StringContent(serializedOjb);
             requestMessage.Content.Headers.ContentType
