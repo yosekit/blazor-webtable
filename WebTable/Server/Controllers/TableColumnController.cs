@@ -5,16 +5,18 @@ namespace WebTable.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TableItemsController : ControllerBase
+    public class TableColumnController : ControllerBase
     {
         private readonly DataContext _context;
-        public TableItemsController(DataContext context)
+        public TableColumnController(DataContext context)
         {
             _context = context;
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<TableItem>>> Get() =>
-            Ok(await _context.Items.ToListAsync());
+        public async Task<ActionResult<List<TableColumn>>> GetColumns()
+        {
+            return await _context.Columns.ToListAsync();
+        } 
     }
 }

@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components;
-using System.Net.Http.Json;
 using WebTable.Shared.Models;
 
 namespace WebTable.Client.Pages
@@ -9,9 +8,6 @@ namespace WebTable.Client.Pages
         public List<TableColumn>? Columns { get; set; }
         public List<TableRow>? Rows { get; set; }
         public List<TableItem>? Items { get; set; }
-
-        [Inject]
-        public HttpClient Http { get; set; } = default!;
 
         public TableItem GetTableItem(TableRow row, TableColumn column)
         {
@@ -23,9 +19,10 @@ namespace WebTable.Client.Pages
 
         protected override async Task OnInitializedAsync()
         {
-            Columns = await Http.GetFromJsonAsync<List<TableColumn>>("api/TableColumns");
-            Rows    = await Http.GetFromJsonAsync<List<TableRow>>("api/TableRows");
-            Items   = await Http.GetFromJsonAsync<List<TableItem>>("api/TableItems");
+            Columns = await tableColumnsService.GetAllAsync();
+            Rows    = await tableRowsService.GetAllAsync();
+            Items   = await tableItemsService.GetAllAsync();
         }
+
     }
 }
