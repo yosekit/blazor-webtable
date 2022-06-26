@@ -17,12 +17,25 @@ namespace WebTable.Client.Pages
             return Items[0];
         }
 
-        protected override async Task OnInitializedAsync()
+        protected override async Task OnAfterRenderAsync(bool firstRender)
         {
-            Columns = await tableColumnsService.GetAllAsync();
-            Rows    = await tableRowsService.GetAllAsync();
-            Items   = await tableItemsService.GetAllAsync();
+            if(firstRender)
+            {
+                await LoadTableAsync();
+
+                StateHasChanged();
+            }
+
+            await base.OnAfterRenderAsync(firstRender);
         }
 
+        private async Task LoadTableAsync()
+        {
+            Columns = await tableColumnsService.GetAllAsync();
+            Rows = await tableRowsService.GetAllAsync();
+            Items = await tableItemsService.GetAllAsync();
+
+            StateHasChanged();
+        }
     }
 }
