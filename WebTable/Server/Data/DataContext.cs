@@ -12,22 +12,27 @@
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<TableColumn>()
-                .Property(c => c.Type)
-                .HasConversion<string>();
+                .Property(c => c.TypeId)
+                .HasConversion<int>();
 
             modelBuilder.Entity<TableColumnType>()
-                .Property(t => t.Name)
-                .HasConversion<string>();
+                .Property(t => t.Id)
+                .HasConversion<int>();
 
-            // default first column
-            modelBuilder.Entity<TableColumn>()
-                .HasData(new TableColumn
+            // ceed column types
+            modelBuilder.Entity<TableColumnType>().HasData(
+                Enum.GetValues(typeof(TableColumnTypeId))
+                .Cast<TableColumnTypeId>()
+                .Select(type => new TableColumnType()
                 {
-                    Id = 1,
-                    Name = "Name",
-                    TypeId = 1,
-                    Type = TableColumnType.DataType.Text,
-                });
+                    Id = type,
+                    Name = type.ToString()
+                })
+            );
+
+            // ceed default first column
+            modelBuilder.Entity<TableColumn>()
+                .HasData(new TableColumn { Id = 1 });
         }
     }
 }

@@ -33,14 +33,12 @@ namespace WebTable.Server.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Type")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("TypeId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("TypeId");
 
                     b.ToTable("Columns");
 
@@ -49,18 +47,14 @@ namespace WebTable.Server.Migrations
                         {
                             Id = 1,
                             Name = "Name",
-                            Type = "Text",
-                            TypeId = 1
+                            TypeId = 0
                         });
                 });
 
             modelBuilder.Entity("WebTable.Shared.Models.TableColumnType", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -69,6 +63,23 @@ namespace WebTable.Server.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ColumnTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 0,
+                            Name = "Text"
+                        },
+                        new
+                        {
+                            Id = 1,
+                            Name = "Number"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Date"
+                        });
                 });
 
             modelBuilder.Entity("WebTable.Shared.Models.TableItem", b =>
@@ -111,6 +122,17 @@ namespace WebTable.Server.Migrations
                     b.ToTable("Rows");
                 });
 
+            modelBuilder.Entity("WebTable.Shared.Models.TableColumn", b =>
+                {
+                    b.HasOne("WebTable.Shared.Models.TableColumnType", "Type")
+                        .WithMany("Columns")
+                        .HasForeignKey("TypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Type");
+                });
+
             modelBuilder.Entity("WebTable.Shared.Models.TableItem", b =>
                 {
                     b.HasOne("WebTable.Shared.Models.TableColumn", "Column")
@@ -128,6 +150,11 @@ namespace WebTable.Server.Migrations
                     b.Navigation("Column");
 
                     b.Navigation("Row");
+                });
+
+            modelBuilder.Entity("WebTable.Shared.Models.TableColumnType", b =>
+                {
+                    b.Navigation("Columns");
                 });
 #pragma warning restore 612, 618
         }
