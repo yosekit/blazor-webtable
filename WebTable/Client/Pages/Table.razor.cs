@@ -52,5 +52,12 @@ namespace WebTable.Client.Pages
 
             await LoadTableAsync();
         }
+
+        private async Task DeleteRow(int id)
+        {
+            await tableRowService.DeleteAsync(id);
+
+            await LoadTableAsync();
+        }
     }
 }

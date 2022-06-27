@@ -55,5 +55,14 @@ namespace WebTable.Client.Services
 
             return await Task.FromResult(returnedObj);
         }
+
+        public async Task<bool> DeleteAsync(int id)
+        {
+            var requestMessage = new HttpRequestMessage(HttpMethod.Delete, _requestUri + "/" + id);
+
+            await _http.SendAsync(requestMessage);
+
+            return await Task.FromResult(true);
+        }
     }
 }

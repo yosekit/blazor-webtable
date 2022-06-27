@@ -51,6 +51,9 @@
 							<div class="position-relative webtable-rows">
 								@foreach (var row in Rows)
 								{
+									<div class="d-flex webtable-focusable webtable-delete-row" type="button" @onclick="(() => DeleteRow(row.Id))">
+										<span class="oi oi-x" aria-hidden="true"></span>
+									</div>
 									<div class="d-flex webtable-selectable webtable-rows-row">
 										@foreach (var column in Columns)
 										{

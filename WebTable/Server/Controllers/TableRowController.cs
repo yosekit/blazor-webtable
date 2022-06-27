@@ -54,5 +54,22 @@ namespace WebTable.Server.Controllers
             return await Task.FromResult(row);
         }
 
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<TableRow>> DeleteRow(int id)
+        {
+            var row = await _context.Rows.FindAsync(id);
+
+            if(row is null)
+            {
+                return NotFound();
+            }
+
+            _context.Rows.Remove(row);
+
+            await _context.SaveChangesAsync();
+
+            return Ok(row);
+        }
+
     }
 }

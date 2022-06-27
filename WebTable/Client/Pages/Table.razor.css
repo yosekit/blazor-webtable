@@ -114,6 +114,23 @@
     border-bottom: 1px solid rgb(233, 233, 231);
 }
 
+.webtable-delete-row {
+    top: 3px;
+    left: -44px;
+    width: 24px;
+    height: 24px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+    fill: rgba(55, 53, 47, 0.35);
+    user-select: none;
+    pointer-events: auto;
+    transition: background 20ms ease-in 0s;
+}
+.webtable-delete-row:hover {
+    background: rgba(55, 53, 47, 0.08) none repeat scroll 0% 0%;
+}
+
 .webtable-item {
     padding: 5px 8px 6px;
     display: block;
