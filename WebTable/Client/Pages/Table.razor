@@ -1,6 +1,7 @@
 ﻿@inject ITableService<TableColumn> tableColumnService
 @inject ITableService<TableRow> tableRowService
 @inject ITableService<TableItem> tableItemService
+@inject ITableService<TableColumnType> tableColumnTypeService
 @page "/table"
 
 <PageTitle>Table - демонстрация таблицы</PageTitle>
@@ -24,10 +25,10 @@
 								<div class="d-inline-flex m-0">
 									@foreach (var column in Columns)
 									{
-										string columnId = "column" + column.Id;
+										string columnLabel = "column" + column.Id;
 
 										<div class="dropdown">
-											<div class="d-flex flex-row" type="button" id="@columnId" data-bs-toggle="dropdown" aria-expanded="false">
+											<div class="d-flex flex-row" type="button" id="@columnLabel" data-bs-toggle="dropdown" aria-expanded="false">
 												<div class="d-flex position-relative">
 													<div class="d-flex webtable-columns-column">
 														<div class="d-flex webtable-focusable webtable-columns-column-header">
@@ -40,9 +41,13 @@
 												</div>
 											</div>
 
-											<ul class="dropdown-menu" aria-labelledby="@columnId">
-												<li><span class="dropdown-item">Edit</span></li>
-												<li type="button" @onclick="(() => DeleteColumn(column.Id))"><span class="dropdown-item">Delete</span></li>
+											<ul class="dropdown-menu" aria-labelledby="@columnLabel">
+												<li type="button" data-bs-toggle="modal" data-bs-target="#columnEditModal" @onclick="(() => MapEditedColumn(column))">
+													<span class="dropdown-item">Edit</span>
+												</li>
+												<li type="button" @onclick="(() => DeleteColumn(column.Id))">
+													<span class="dropdown-item">Delete</span>
+												</li>
 											</ul>
 										</div>
 									}
@@ -53,6 +58,40 @@
 							</div>
 
 							<div style="height: 34px;"></div>
+
+							<div class="modal fade" id="columnEditModal" tabindex="-1" aria-hidden="true">
+								<div class="modal-dialog modal-dialog-centered">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title">Edit column</h5>
+											<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+										</div>
+										<div class="modal-body">
+											<EditForm Model="@EditedColumn" OnSubmit="@EditColumn">
+												<div class="mb-3">
+													<InputText class="form-control" @bind-Value="EditedColumn.Name"></InputText>
+												</div>
+												<div class="mb-3">
+													<label for="forSelectColumnType" class="form-label">Type:</label>
+													<InputSelect @bind-Value="EditedColumn.TypeId" class="form-control">
+														@if (ColumnTypes is not null)
+														{
+															foreach (var columnType in ColumnTypes)
+															{
+															<option value="@columnType.Id.ToString()">@columnType.Name</option>
+															}
+														}
+													</InputSelect>
+												</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+													<button type="submit" class="btn btn-primary">Save changes</button>
+												</div>
+											</EditForm>
+										</div>
+									</div>
+								</div>
+							</div>
 						}
 
 						@if (Rows is not null && Columns is not null)

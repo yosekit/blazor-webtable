@@ -6,8 +6,16 @@ namespace WebTable.Client.Pages
     public partial class Table
     {
         public List<TableColumn>? Columns { get; set; }
+        public List<TableColumnType>? ColumnTypes { get; set; }
         public List<TableRow>? Rows { get; set; }
         public List<TableItem>? Items { get; set; }
+
+        public TableColumn EditedColumn { get; set; } = new TableColumn();
+
+        private void MapEditedColumn(TableColumn column)
+        {
+            EditedColumn = column;
+        }
 
         public TableItem GetTableItem(TableRow row, TableColumn column)
         {
@@ -29,6 +37,7 @@ namespace WebTable.Client.Pages
         private async Task LoadTableAsync()
         {
             Columns = await tableColumnService.GetAllAsync();
+            ColumnTypes = await tableColumnTypeService.GetAllAsync();
             Rows = await tableRowService.GetAllAsync();
             Items = await tableItemService.GetAllAsync();
 
@@ -47,6 +56,13 @@ namespace WebTable.Client.Pages
         private async Task DeleteColumn(int id)
         {
             await tableColumnService.DeleteAsync(id);
+
+            await LoadTableAsync();
+        }
+
+        private async Task EditColumn()
+        {
+            await tableColumnService.UpdateAsync(EditedColumn);
 
             await LoadTableAsync();
         }

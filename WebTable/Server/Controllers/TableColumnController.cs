@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
 
 namespace WebTable.Server.Controllers
 {
@@ -65,6 +64,23 @@ namespace WebTable.Server.Controllers
             }
 
             _context.Columns.Remove(column);
+
+            await _context.SaveChangesAsync();
+
+            return Ok(column);
+        }
+
+        [HttpPut]
+        public async Task<ActionResult<TableColumn>> PutColumn(TableColumn column)
+        {
+            bool foundColumn = await _context.Columns.AnyAsync(c => c.Id == column.Id);
+
+            if (!foundColumn)
+            {
+                return NotFound();
+            }
+
+            _context.Entry(column).State = EntityState.Modified;
 
             await _context.SaveChangesAsync();
 

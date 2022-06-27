@@ -12,5 +12,6 @@ builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.
 builder.Services.AddScoped<ITableService<TableColumn>, TableColumnService>();
 builder.Services.AddScoped<ITableService<TableRow>, TableRowService>();
 builder.Services.AddScoped<ITableService<TableItem>, TableItemService>();
+builder.Services.AddScoped<ITableService<TableColumnType>, TableColumnTypeService>();
 
 await builder.Build().RunAsync();

@@ -64,5 +64,24 @@ namespace WebTable.Client.Services
 
             return await Task.FromResult(true);
         }
+
+        public async Task<T> UpdateAsync(T obj)
+        {
+            string serializedOjb = JsonConvert.SerializeObject(obj);
+
+            var requestMessage = new HttpRequestMessage(HttpMethod.Put, _requestUri);
+
+            requestMessage.Content = new StringContent(serializedOjb);
+            requestMessage.Content.Headers.ContentType
+                = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+
+            var response = await _http.SendAsync(requestMessage);
+
+            var responseBody = await response.Content.ReadAsStringAsync();
+
+            var returnedObj = JsonConvert.DeserializeObject<T>(responseBody);
+
+            return await Task.FromResult(returnedObj);
+        }
     }
 }
