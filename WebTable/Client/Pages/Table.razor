@@ -24,17 +24,26 @@
 								<div class="d-inline-flex m-0">
 									@foreach (var column in Columns)
 									{
-										<div class="d-flex flex-row">
-											<div class="d-flex position-relative">
-												<div class="d-flex webtable-columns-column">
-													<div class="d-flex webtable-focusable webtable-columns-column-header">
-														<div class="d-flex webtable-columns-column-content">
-															<div class="webtable-columns-column-content-icon"></div>
-															<div class="webtable-columns-column-content-name">@column.Name</div>
+										string columnId = "column" + column.Id;
+
+										<div class="dropdown">
+											<div class="d-flex flex-row" type="button" id="@columnId" data-bs-toggle="dropdown" aria-expanded="false">
+												<div class="d-flex position-relative">
+													<div class="d-flex webtable-columns-column">
+														<div class="d-flex webtable-focusable webtable-columns-column-header">
+															<div class="d-flex webtable-columns-column-content">
+																<div class="webtable-columns-column-content-icon"></div>
+																<div class="webtable-columns-column-content-name">@column.Name</div>
+															</div>
 														</div>
 													</div>
 												</div>
 											</div>
+
+											<ul class="dropdown-menu" aria-labelledby="@columnId">
+												<li><span class="dropdown-item">Edit</span></li>
+												<li><span class="dropdown-item">Delete</span></li>
+											</ul>
 										</div>
 									}
 								</div>
