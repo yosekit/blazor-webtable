@@ -14,8 +14,6 @@
 /********************************/
 
 .webtable-wrapper {
-    margin-top: 1px;
-    margin-bottom: 0px;
     width: 996px;
     max-width: 996px;
     align-self: center;
@@ -95,9 +93,9 @@
     transition: background 20ms ease-in 0s;
 }
 
-.webtable-add-column:hover {
-    background: rgba(55, 53, 47, 0.08) none repeat scroll 0% 0%;
-}
+    .webtable-add-column:hover {
+        background: rgba(55, 53, 47, 0.08) none repeat scroll 0% 0%;
+    }
 
 .webtable-add-column-icon {
     width: 32px;
@@ -114,10 +112,9 @@
     border-bottom: 1px solid rgb(233, 233, 231);
 }
 
-.webtable-delete-row {
-    top: 3px;
-    left: -44px;
-    width: 24px;
+.webtable-row-actions-delete {
+    left: -4px;
+    width: 18px;
     height: 24px;
     align-items: center;
     justify-content: center;
@@ -127,7 +124,7 @@
     pointer-events: auto;
     transition: background 20ms ease-in 0s;
 }
-.webtable-delete-row:hover {
+.webtable-row-actions-delete:hover {
     background: rgba(55, 53, 47, 0.08) none repeat scroll 0% 0%;
 }
 
@@ -166,9 +163,9 @@
     transition: background 20ms ease-in 0s;
 }
 
-.webtable-add-row:hover {
-    background: rgba(55, 53, 47, 0.08) none repeat scroll 0% 0%;
-}
+    .webtable-add-row:hover {
+        background: rgba(55, 53, 47, 0.08) none repeat scroll 0% 0%;
+    }
 
 .webtable-add-row-text {
     color: rgba(55, 53, 47, 0.5);
@@ -187,9 +184,9 @@
     clip-path: polygon(0% -20%, 100% -20%, 100% 100%, 0% 100%);
 }
 
-.webtable-functions > div:hover {
-    background: rgba(55, 53, 47, 0.08) none repeat scroll 0% 0%;
-}
+    .webtable-functions > div:hover {
+        background: rgba(55, 53, 47, 0.08) none repeat scroll 0% 0%;
+    }
 
 .webtable-functions-function {
     padding-right: 8px;
@@ -204,10 +201,10 @@
     transition: background 20ms ease-in 0s;
 }
 
-.webtable-functions-function > div {
-    align-items: center;
-    opacity: 1;
-}
+    .webtable-functions-function > div {
+        align-items: center;
+        opacity: 1;
+    }
 
 span.webtable-functions-function-name {
     margin-bottom: 2px;
