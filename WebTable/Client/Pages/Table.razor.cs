@@ -44,6 +44,13 @@ namespace WebTable.Client.Pages
             await LoadTableAsync();
         }
 
+        private async Task DeleteColumn(int id)
+        {
+            await tableColumnService.DeleteAsync(id);
+
+            await LoadTableAsync();
+        }
+
         private async Task AddRow()
         {
             var row = new TableRow();

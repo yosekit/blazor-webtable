@@ -53,5 +53,22 @@ namespace WebTable.Server.Controllers
 
             return await Task.FromResult(column);
         }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<TableColumn>> DeleteColumn(int id)
+        {
+            var column = await _context.Columns.FindAsync(id);
+
+            if (column is null)
+            {
+                return NotFound();
+            }
+
+            _context.Columns.Remove(column);
+
+            await _context.SaveChangesAsync();
+
+            return Ok(column);
+        }
     }
 }

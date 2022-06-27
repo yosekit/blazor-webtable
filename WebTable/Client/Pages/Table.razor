@@ -42,7 +42,7 @@
 
 											<ul class="dropdown-menu" aria-labelledby="@columnId">
 												<li><span class="dropdown-item">Edit</span></li>
-												<li><span class="dropdown-item">Delete</span></li>
+												<li type="button" @onclick="(() => DeleteColumn(column.Id))"><span class="dropdown-item">Delete</span></li>
 											</ul>
 										</div>
 									}
