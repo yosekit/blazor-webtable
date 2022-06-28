@@ -9,13 +9,24 @@
 
 .webtable-focusable {
     transition: box-shadow 300ms;
+    transition: background 20ms ease-in 0s;
 }
+
+    .webtable-focusable:hover {
+        background: rgba(55, 53, 47, 0.08) none repeat scroll 0% 0%;
+    }
 
 /********************************/
 
+.webtable-title {
+    margin-bottom: 4rem;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+}
+
 .webtable-wrapper {
-    width: 996px;
-    max-width: 996px;
+    width: 1205px;
+    max-width: 1205px;
     align-self: center;
 }
 
@@ -61,12 +72,10 @@
     height: 100%;
     user-select: none;
     cursor: pointer;
-    transition: background 20ms ease-in 0s;
 }
 
-.webtable-columns-column-header:hover {
-    background: rgba(55, 53, 47, 0.08) none repeat scroll 0% 0%;
-}
+    .webtable-columns-column-header:hover {
+    }
 
 .webtable-columns-column-content {
     min-width: 0px;
@@ -90,43 +99,39 @@
     justify-content: flex-start;
     user-select: none;
     cursor: pointer;
-    transition: background 20ms ease-in 0s;
 }
-
-    .webtable-add-column:hover {
-        background: rgba(55, 53, 47, 0.08) none repeat scroll 0% 0%;
+    .webtable-add-column > span.oi {
+        top: 11px;
+        left: 10px;
+        font-size: 11px;
     }
 
-.webtable-add-column-icon {
-    width: 32px;
-    height: 100%;
-    align-items: center;
-    justify-content: center;
-}
-
-.webtable-rows {
-    min-width: calc(100% - 252px);
-}
+    .webtable-rows {
+        min-width: calc(100% - 252px);
+    }
 
 .webtable-rows-row {
     border-bottom: 1px solid rgb(233, 233, 231);
 }
 
 .webtable-row-actions-delete {
-    left: -4px;
+    left: -22px;
+    z-index: 3000;
     width: 18px;
     height: 24px;
-    align-items: center;
-    justify-content: center;
     border-radius: 3px;
-    fill: rgba(55, 53, 47, 0.35);
     user-select: none;
     pointer-events: auto;
-    transition: background 20ms ease-in 0s;
 }
-.webtable-row-actions-delete:hover {
-    background: rgba(55, 53, 47, 0.08) none repeat scroll 0% 0%;
-}
+
+
+
+    .webtable-row-actions-delete > span.oi {
+        top: 11px;
+        left: 4px;
+        font-size: 11px;
+        color: rgba(55, 53, 47, 0.65);
+    }
 
 .webtable-item {
     padding: 5px 8px 6px;
@@ -166,12 +171,9 @@
     font-size: 14px;
     line-height: 20px;
     background: white none repeat scroll 0% 0%;
-    transition: background 20ms ease-in 0s;
 }
 
-    .webtable-add-row:hover {
-        background: rgba(55, 53, 47, 0.08) none repeat scroll 0% 0%;
-    }
+
 
 .webtable-add-row-text {
     color: rgba(55, 53, 47, 0.5);
@@ -190,9 +192,6 @@
     clip-path: polygon(0% -20%, 100% -20%, 100% 100%, 0% 100%);
 }
 
-    .webtable-functions > div:hover {
-        background: rgba(55, 53, 47, 0.08) none repeat scroll 0% 0%;
-    }
 
 .webtable-functions-function {
     padding-right: 8px;
@@ -204,7 +203,6 @@
     overflow: hidden;
     user-select: auto;
     cursor: pointer;
-    transition: background 20ms ease-in 0s;
 }
 
     .webtable-functions-function > div {

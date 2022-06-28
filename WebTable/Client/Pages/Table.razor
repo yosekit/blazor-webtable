@@ -7,14 +7,13 @@
 
 <PageTitle>Table - демонстрация таблицы</PageTitle>
 
-<h1 class="mb-5">Table</h1>
+<h1 class="webtable-title">Table - демонстрация таблицы</h1>
 
 <div class="webtable-wrapper">
 	<div class="d-flex webtable-table">
 		<div class="position-relative">
 			<div class="webtable-scroller">
-				<div class="position-relative webtable-table-view">
-					<div class="position-relative">
+				<div class="webtable-table-view">
 
 						@if (Columns is null)
 						{
@@ -28,13 +27,15 @@
 									{
 										string columnLabel = "column" + column.Id;
 
-										<div class="dropdown">
-											<div class="d-flex flex-row" type="button" id="@columnLabel" data-bs-toggle="dropdown" aria-expanded="false">
+										<div class="d-flex dropdown">
+											<div class="d-flex" type="button" id="@columnLabel" data-bs-toggle="dropdown" aria-expanded="false">
 												<div class="d-flex position-relative">
 													<div class="d-flex webtable-columns-column">
 														<div class="d-flex webtable-focusable webtable-columns-column-header">
 															<div class="d-flex webtable-columns-column-content">
-																<div class="webtable-columns-column-content-icon"></div>
+																<div class="webtable-columns-column-content-icon">
+																	<span class="oi oi-@(ColumnIconsMap[column.TypeId])" aria-hidden="true"></span>
+																</div>
 																<div class="webtable-columns-column-content-name">@column.Name</div>
 															</div>
 														</div>
@@ -54,7 +55,7 @@
 									}
 								</div>
 								<div class="d-flex webtable-focusable webtable-add-column" type="button" @onclick=AddColumn>
-									<div class="d-flex webtable-add-column-icon">+</div>
+									<span class="oi oi-plus" aria-hidden="true"></span>
 								</div>
 							</div>
 
@@ -139,7 +140,7 @@
 								{
 									<div class="d-flex" style="width: 276px">
 										<div class="d-flex webtable-focusable webtable-functions-function">
-											<div class="d-flex">
+											<div class="d-flex ">
 												<span class="webtable-functions-function-name">Calculate</span>
 												<div class="webtable-functions-function-icon"></div>
 											</div>
@@ -149,10 +150,17 @@
 							</div>
 						}
 
-					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
 
+@code {
+	public Dictionary<TableColumnTypeId, string> ColumnIconsMap { get; } = new()
+	{
+		{ TableColumnTypeId.Text, "align-left"},
+		{ TableColumnTypeId.Number, "calculator"},
+		{ TableColumnTypeId.Date, "clock"},
+	};
+}
