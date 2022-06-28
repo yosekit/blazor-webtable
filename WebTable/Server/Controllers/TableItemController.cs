@@ -29,6 +29,11 @@ namespace WebTable.Server.Controllers
                 return NotFound();
             }
 
+            if (!ModelState.IsValid)
+            {
+                return NotFound();
+            }
+
             _context.Entry(item).State = EntityState.Modified;
 
             await _context.SaveChangesAsync();

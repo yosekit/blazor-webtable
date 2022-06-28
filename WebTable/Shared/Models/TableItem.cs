@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using WebTable.Shared.Validations;
 
 namespace WebTable.Shared.Models
 {
@@ -15,6 +16,7 @@ namespace WebTable.Shared.Models
         public int RowId { get; set; }
         public TableRow? Row { get; set; }
 
+        [ContentDataType]
         public string Content { get; set; } = string.Empty;
     }
 }

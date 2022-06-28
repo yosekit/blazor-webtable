@@ -26,15 +26,17 @@
 
     <script>
         window.focusontableitemeditor = (row, col) => {
-            var editor = $('.webtable-edit-item');
-            editor.css(
-                {
-                    'top': (parseInt(editor.css('max-height'), 10) * row).toString() + 'px',
-                    'left': (parseInt(editor.css('max-width'), 10) * col).toString() + 'px'
-                }
-            );
-            $("#tableItemEditorForm").toggleClass('d-none', false);
-            $("#tableItemEditorInput").focus();
+            $(document).ready(function () {
+                var editor = $('.webtable-edit-item');
+                editor.css(
+                    {
+                        'top': (parseInt(editor.css('max-height'), 10) * row).toString() + 'px',
+                        'left': (parseInt(editor.css('max-width'), 10) * col).toString() + 'px'
+                    }
+                );
+                $("#tableItemEditorForm").toggleClass('d-none', false);
+                $("#tableItemEditorInput").focus();
+            })
         }
 
         window.submittableitemeditor = () => {
