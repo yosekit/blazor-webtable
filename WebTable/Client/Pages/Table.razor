@@ -2,6 +2,7 @@
 @inject ITableService<TableRow> tableRowService
 @inject ITableService<TableItem> tableItemService
 @inject ITableService<TableColumnType> tableColumnTypeService
+@inject IJSRuntime JS
 @page "/table"
 
 <PageTitle>Table - демонстрация таблицы</PageTitle>
@@ -81,17 +82,17 @@
 															<option value="@columnType.Id.ToString()">@columnType.Name</option>
 															}
 														}
-													</InputSelect>
-												</div>
-												<div class="modal-footer">
-													<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-													<button type="submit" class="btn btn-primary">Save changes</button>
-												</div>
-											</EditForm>
-										</div>
+												</InputSelect>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+												<button type="submit" class="btn btn-primary">Save changes</button>
+											</div>
+										</EditForm>
 									</div>
 								</div>
 							</div>
+						</div>
 						}
 
 						@if (Rows is not null && Columns is not null)
@@ -100,15 +101,18 @@
 								@foreach (var row in Rows)
 								{
 									<div class="d-flex webtable-selectable webtable-rows-row">
-										<div class="d-flex position-absolute webtable-focusable webtable-row-actions-delete" type="button" @onclick="(() => DeleteRow(row.Id))">
+										<div class="d-flex position-absolute webtable-focusable webtable-row-actions-delete" type="button" 
+										@onclick="(() => DeleteRow(row.Id))">
 											<span class="oi oi-x" aria-hidden="true"></span>
 										</div>
 
 										@foreach (var column in Columns)
 										{
-											<div class="d-flex">
+											var item = GetTableItem(row, column);
+
+											<div class="d-flex" @onclick="(() => MapEditedItemAsync(item, Rows.IndexOf(row) + 1, Columns.IndexOf(column)))">
 												<div class="webtable-item">
-													<span class="webtable-item-content">@GetTableItem(row, column).Content</span>
+													<span class="webtable-item-content">@item.Content</span>
 												</div>
 											</div>
 										}
@@ -116,6 +120,12 @@
 								}
 							</div>
 						}
+
+						<div class="position-absolute webtable-edit-item">
+							<EditForm Model="@EditedItem" OnSubmit="@EditItem" id="tableItemEditorForm" class="d-none">
+								<InputText class="form-control" @bind-Value="EditedItem.Content" id="tableItemEditorInput"></InputText>
+							</EditForm>
+						</div>
 
 						<div class="d-flex webtable-focusable webtable-add-row" type="button" @onclick=AddRow>
 							<div class="webtable-add-row-icon"></div>

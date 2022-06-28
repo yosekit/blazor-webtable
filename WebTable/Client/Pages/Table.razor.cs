@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 using WebTable.Shared.Models;
 
 namespace WebTable.Client.Pages
@@ -11,21 +12,15 @@ namespace WebTable.Client.Pages
         public List<TableItem>? Items { get; set; }
 
         public TableColumn EditedColumn { get; set; } = new TableColumn();
-
-        private void MapEditedColumn(TableColumn column)
-        {
-            EditedColumn = column;
-        }
-
-        public TableItem GetTableItem(TableRow row, TableColumn column)
-        {
-            return Items.FirstOrDefault(i => i.RowId == row.Id && i.ColumnId == column.Id);
-        }
+        public TableItem EditedItem { get; set; } = new TableItem();
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
-            if(firstRender)
+
+            if (firstRender)
             {
+                await JS.InvokeVoidAsync("submittableitemeditor");
+
                 await LoadTableAsync();
 
                 StateHasChanged();
@@ -81,6 +76,30 @@ namespace WebTable.Client.Pages
             await tableRowService.DeleteAsync(id);
 
             await LoadTableAsync();
+        }
+
+        private async Task EditItem()
+        {
+            await tableItemService.UpdateAsync(EditedItem);
+
+            await LoadTableAsync();
+        }
+
+        private void MapEditedColumn(TableColumn column)
+        {
+            EditedColumn = column;
+        }
+
+        private async Task MapEditedItemAsync(TableItem item, int dataRow, int dataCol)
+        {
+            EditedItem = item;
+
+            await JS.InvokeAsync<object>("focusontableitemeditor", dataRow, dataCol);
+        }
+
+        public TableItem GetTableItem(TableRow row, TableColumn column)
+        {
+            return Items.FirstOrDefault(i => i.RowId == row.Id && i.ColumnId == column.Id);
         }
     }
 }

@@ -18,5 +18,22 @@ namespace WebTable.Server.Controllers
         {
             return await _context.Items.ToListAsync();
         }
+
+        [HttpPut]
+        public async Task<ActionResult<TableItem>> PutItem(TableItem item)
+        {
+            bool foundItem = await _context.Items.AnyAsync(i => i.Id == item.Id);
+
+            if (!foundItem)
+            {
+                return NotFound();
+            }
+
+            _context.Entry(item).State = EntityState.Modified;
+
+            await _context.SaveChangesAsync();
+
+            return Ok(item);
+        }
     }
 }

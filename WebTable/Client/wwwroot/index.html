@@ -24,6 +24,29 @@
     <script src="lib/popper.js/umd/popper.min.js"></script>
     <script src="lib/bootstrap/js/bootstrap.min.js"></script>
 
+    <script>
+        window.focusontableitemeditor = (row, col) => {
+            var editor = $('.webtable-edit-item');
+            editor.css(
+                {
+                    'top': (parseInt(editor.css('max-height'), 10) * row).toString() + 'px',
+                    'left': (parseInt(editor.css('max-width'), 10) * col).toString() + 'px'
+                }
+            );
+            $("#tableItemEditorForm").toggleClass('d-none', false);
+            $("#tableItemEditorInput").focus();
+        }
+
+        window.submittableitemeditor = () => {
+            $(document).ready(function () {
+                $("#tableItemEditorInput").blur(function () {
+                    $("#tableItemEditorForm").submit();
+                    $("#tableItemEditorForm").toggleClass('d-none', true);
+                });
+            });
+        }
+    </script>
+
     <script src="_framework/blazor.webassembly.js"></script>
 </body>
 
