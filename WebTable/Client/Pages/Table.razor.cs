@@ -97,7 +97,7 @@ namespace WebTable.Client.Pages
             await JS.InvokeAsync<object>("focusontableitemeditor", dataRow, dataCol);
         }
 
-        public TableItem GetTableItem(TableRow row, TableColumn column)
+        private TableItem GetTableItem(TableRow row, TableColumn column)
         {
             return Items.FirstOrDefault(i => i.RowId == row.Id && i.ColumnId == column.Id);
         }
