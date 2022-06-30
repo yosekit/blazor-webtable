@@ -178,39 +178,3 @@
 .webtable-add-row-text {
     color: rgba(55, 53, 47, 0.5);
 }
-
-.webtable-functions {
-    padding-right: 32px;
-    height: 33px;
-    min-width: 100%;
-    left: 0px;
-    z-index: 82;
-    border-top: 1px solid rgb(233, 233, 231);
-    background: white none repeat scroll 0% 0%;
-    font-size: 14px;
-    user-select: none;
-    clip-path: polygon(0% -20%, 100% -20%, 100% 100%, 0% 100%);
-}
-
-
-.webtable-functions-function {
-    padding-right: 8px;
-    width: 100%;
-    height: 32px;
-    align-items: center;
-    justify-content: flex-end;
-    white-space: nowrap;
-    overflow: hidden;
-    user-select: auto;
-    cursor: pointer;
-}
-
-    .webtable-functions-function > div {
-        align-items: center;
-        opacity: 1;
-    }
-
-span.webtable-functions-function-name {
-    margin-bottom: 2px;
-    color: rgba(55, 53, 47, 0.5);
-}
